@@ -24,7 +24,7 @@ Twitter | Twitter | no | NOT FETCHED YET
 Instagram | Instagram | no | NOT FETCHED YET
 Social account | - | no | NOT FETCHED YET
 Repositories URL | Repositories/URL| yes | absolute URL
-Repositories Count | Repositories/URL| yes |
+Repositories Count | Repositories/Count| yes |
 Repositories List | Repositories/Dict| yes | 
 Projects | - | no | WON'T BE FETCHED
 Packages | - | no | WON'T BE FETCHED
@@ -50,7 +50,7 @@ Facebook | Facebook | no | NOT FETCHED YET
 Twitter | Twitter | no | NOT FETCHED YET
 Instagram | Instagram | no | NOT FETCHED YET
 Repositories URL | Repositories/URL| yes | absolute URL
-Repositories Count | Repositories/URL| yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
+Repositories Count | Repositories/Count| yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
 Repositories List | Repositories/Dict| yes | 
 Discussions | - | no | WON'T BE FETCHED
 Projects | - | no | WON'T BE FETCHED
