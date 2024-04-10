@@ -1,11 +1,12 @@
 # GitHub data
 Data is returned as a dictionary where the keys are the accounts nicknames (eg. https://github.com/NICKNAME).
 
-I haven't seen Enterprise accounts yet. Only User and Organization accounts are processed for the moment.
+I haven't seen [Enterprise accounts](https://docs.github.com/en/get-started/learning-about-github/types-of-github-accounts) yet.
+Only Personal and Organization accounts are processed for the moment.
 
 In **bold** what's already available.
 
-## User account
+## Personal accounts
 Data | Field | Required? | Comment
 --- | --- | --- | ---
 Nick name | **Nickname** | yes | As in https://github.com/NICKNAME
@@ -38,7 +39,7 @@ Stars Count | **Stars/Count** | yes |
 Stars List | Stars/Dict | yes | NOT FETCHED YET
 Yearly contributions | - | no | NOT FETCHED YET
 
-## Organization account
+## Organization accounts
 Data | Field | Required? | Comment
 --- | --- | --- | ---
 Profile picture | **Avatar** | no | absolute URL
@@ -62,6 +63,9 @@ Projects | - | no | WON'T BE FETCHED
 Packages | - | no | WON'T BE FETCHED
 Teams | - | no | NOT FETCHED YET
 People | - | no | NOT FETCHED YET
+
+## Enterprise accounts
+Yet to be seen!
 
 ## Repositories dictionary
 A dictionary where the keys are the repositories names.
