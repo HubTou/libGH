@@ -68,12 +68,8 @@ People | - | no | NOT FETCHED YET
 Yet to be seen!
 
 ## Repositories dictionary
-A dictionary where the keys are the repositories names.
+A dictionary where the keys are the repositories names of a personal or organization account.
 
 Data | Field | Required? | Comment
 --- | --- | --- | ---
-- | URL | yes |
-
-## Repository
-Data | Field | Required? | Comment
---- | --- | --- | ---
+url | URL | yes |
