@@ -1,57 +1,58 @@
 # GitHub data
+In **bold** what's already available.
 
 ## User account
 Data | Field | Required? | Comment
 --- | --- | --- | ---
-Nick name | Nickname | yes |
-Avatar | Avatar | no | absolute URL
-Name (full) | Name | no |
-Bio | Biography | no | can be empty
+Nick name | **Nickname** | yes | As in https://github.com/NICKNAME
+Avatar | **Avatar** | no | absolute URL of the profile picture
+Name | **Name** | no | Full name
+Bio | **Biography** | no | can be empty
 Pronouns | - | no | NOT FETCHED YET
-Followers URL | Followers/URL | no |
-Followers count | Followers/Count | no | can be rounded to kilos (or megs?)
-Followers list | | no | NOT FETCHED YET
-Following URL | Followers/URL | no |
-Following count | Followers/Count | no | can be rounded to kilos (or megs?)
-Following list | | no | NOT FETCHED YET
+Followers URL | **Followers/URL** | no |
+Followers count | **Followers/Count** | no | can be rounded to kilos (or megs?)
+Followers list | Followers/Dict | no | NOT FETCHED YET
+Following URL | **Following/URL** | no |
+Following count | **Following/Count** | no | can be rounded to kilos (or megs?)
+Following list | | Following/Dict | NOT FETCHED YET
 Company | Company | no | NOT FETCHED YET
-Location | Location | no |
+Location | **Location** | no |
 Email | Email | no | NOT FETCHED YET
-URL | Website | no | absolute URL
+URL | **Website** | no | absolute URL
 LinkedIn | LinkedIn | no | NOT FETCHED YET
 Facebook | Facebook | no | NOT FETCHED YET
 Twitter | Twitter | no | NOT FETCHED YET
 Instagram | Instagram | no | NOT FETCHED YET
 Social account | - | no | NOT FETCHED YET
-Repositories URL | Repositories/URL| yes | absolute URL
-Repositories Count | Repositories/Count| yes |
-Repositories List | Repositories/Dict| yes | 
+Repositories URL | **Repositories/URL** | yes | absolute URL
+Repositories Count | **Repositories/Count** | yes |
+Repositories List | **Repositories/Dict** | yes | 
 Projects | - | no | WON'T BE FETCHED
 Packages | - | no | WON'T BE FETCHED
-Stars URL | Stars/URL | yes | absolute URL
-Stars Count | Stars/Count | yes |
+Stars URL | **Stars/URL** | yes | absolute URL
+Stars Count | **Stars/Count** | yes |
 Stars List | Stars/Dict | yes | NOT FETCHED YET
 Yearly contributions | - | no | NOT FETCHED YET
 
 ## Organization account
 Data | Field | Required? | Comment
 --- | --- | --- | ---
-Profile picture | Avatar | no | absolute URL
-Organization display name | Name | yes |
+Profile picture | **Avatar** | no | absolute URL
+Organization display name | **Name** | yes |
 Email | Email | ? | NOT FETCHED YET
-Description | Biography | yes?| can be empty
-Followers URL | Followers/URL | no |
-Followers count | Followers/Count | no | can be rounded to kilos (or megs?)
-Followers list | | no | NOT FETCHED YET
-Location | Location | no |
-URL | Website | no | absolute URL
+Description | **Biography** | yes?| can be empty
+Followers URL | **Followers/URL** | no |
+Followers count | **Followers/Count** | no | can be rounded to kilos (or megs?)
+Followers list | Followers/Dict | no | NOT FETCHED YET
+Location | **Location** | no |
+URL | **Website** | no | absolute URL
 LinkedIn | LinkedIn | no | NOT FETCHED YET
 Facebook | Facebook | no | NOT FETCHED YET
 Twitter | Twitter | no | NOT FETCHED YET
 Instagram | Instagram | no | NOT FETCHED YET
-Repositories URL | Repositories/URL| yes | absolute URL
-Repositories Count | Repositories/Count| yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
-Repositories List | Repositories/Dict| yes | 
+Repositories URL | **Repositories/URL** | yes | absolute URL
+Repositories Count | **Repositories/Count** | yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
+Repositories List | **Repositories/Dict** | yes | 
 Discussions | - | no | WON'T BE FETCHED
 Projects | - | no | WON'T BE FETCHED
 Packages | - | no | WON'T BE FETCHED
