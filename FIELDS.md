@@ -1,4 +1,8 @@
 # GitHub data
+Data is returned as a dictionary where the keys are the accounts nicknames (eg. https://github.com/NICKNAME).
+
+I haven't seen Enterprise accounts yet. Only User and Organization accounts are processed for the moment.
+
 In **bold** what's already available.
 
 ## User account
@@ -59,9 +63,12 @@ Packages | - | no | WON'T BE FETCHED
 Teams | - | no | NOT FETCHED YET
 People | - | no | NOT FETCHED YET
 
-## Repositories list
+## Repositories dictionary
+A dictionary where the keys are the repositories names.
+
 Data | Field | Required? | Comment
 --- | --- | --- | ---
+- | URL | yes |
 
 ## Repository
 Data | Field | Required? | Comment
