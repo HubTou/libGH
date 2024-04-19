@@ -7,17 +7,14 @@ Only Personal and Organization accounts are processed for the moment.
 In **bold** what's already available.
 
 ## Personal accounts
-Data | Field | Required? | Comment
+Data | libGitHub Field | Required? | Comment
 --- | --- | --- | ---
-Nick name | **Nickname** | yes | As in https://github.com/NICKNAME
 Avatar | **Avatar** | no | absolute URL of the profile picture
 Name | **Name** | no | Full name
 Bio | **Biography** | no | can be empty
 Pronouns | - | no | NOT FETCHED YET
-Followers URL | **Followers/URL** | no |
 Followers count | **Followers/Count** | no | can be rounded to kilos (or megs?)
 Followers list | Followers/Dict | no | NOT FETCHED YET
-Following URL | **Following/URL** | no |
 Following count | **Following/Count** | no | can be rounded to kilos (or megs?)
 Following list | | Following/Dict | NOT FETCHED YET
 Company | Company | no | NOT FETCHED YET
@@ -29,24 +26,44 @@ Facebook | Facebook | no | NOT FETCHED YET
 Twitter | Twitter | no | NOT FETCHED YET
 Instagram | Instagram | no | NOT FETCHED YET
 Social account | - | no | NOT FETCHED YET
-Repositories URL | **Repositories/URL** | yes | absolute URL
 Repositories Count | **Repositories/Count** | yes |
 Repositories List | **Repositories/Dict** | yes | 
 Projects | - | no | WON'T BE FETCHED
 Packages | - | no | WON'T BE FETCHED
-Stars URL | **Stars/URL** | yes | absolute URL
 Stars Count | **Stars/Count** | yes |
 Stars List | Stars/Dict | yes | NOT FETCHED YET
 Yearly contributions | - | no | NOT FETCHED YET
 
+Specific URL:
+
+Item | URL
+--- | ---
+repositories | GH/ACCOUNT?tab=repositories
+projects | GH/ACCOUNT?tab=projects
+packages | GH/ACCOUNT?tab=packages
+stars | GH/ACCOUNT?tab=stars
+followers | GH/ACCOUNT?tab=followers
+following | GH/ACCOUNT?tab=following
+achievements | GH/ACCOUNT?tab=achievements
+overview | GH/ACCOUNT?tab=overview&from=AAAA-MM-DD&to=AAAA-MM-DD
+sponsor | GH/sponsors/ACCOUNT
+
+## personal accounts repositories
+
+Specific URL:
+
+Item | URL
+--- | ---
+forks | GH/ACCOUNT/REPO/forks
+stargazers | GH/ACCOUNT/REPO/stargazers
+
 ## Organization accounts
-Data | Field | Required? | Comment
+Data | libGitHub Field | Required? | Comment
 --- | --- | --- | ---
 Profile picture | **Avatar** | no | absolute URL
 Organization display name | **Name** | yes |
 Email | Email | ? | NOT FETCHED YET
 Description | **Biography** | yes?| can be empty
-Followers URL | **Followers/URL** | no |
 Followers count | **Followers/Count** | no | can be rounded to kilos (or megs?)
 Followers list | Followers/Dict | no | NOT FETCHED YET
 Location | **Location** | no |
@@ -55,7 +72,6 @@ LinkedIn | LinkedIn | no | NOT FETCHED YET
 Facebook | Facebook | no | NOT FETCHED YET
 Twitter | Twitter | no | NOT FETCHED YET
 Instagram | Instagram | no | NOT FETCHED YET
-Repositories URL | **Repositories/URL** | yes | absolute URL
 Repositories Count | **Repositories/Count** | yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
 Repositories List | **Repositories/Dict** | yes | 
 Discussions | - | no | WON'T BE FETCHED
