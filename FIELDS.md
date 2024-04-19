@@ -11,16 +11,16 @@ Data | libGitHub Field | Required? | Comment
 --- | --- | --- | ---
 Avatar | **Avatar** | no | absolute URL of the profile picture
 Name | **Name** | no | Full name
-Pronouns | Pronouns | no | Not provided while unauthenticated
+Pronouns | | no | Not provided while unauthenticated
 Bio | **Biography** | no | can be empty
 Followers count | **Followers/Count** | no | can be rounded to kilos (or megs?)
 Followers list | Followers/Dict | no | NOT FETCHED YET
 Following count | **Following/Count** | no | can be rounded to kilos (or megs?)
-Following list | | Following/Dict | NOT FETCHED YET
+Following list | Following/Dict | no | NOT FETCHED YET
 Company | **Company** | no | NOT FETCHED YET
 Location | **Location** | no |
 Timezone | **Timezone** | no |
-Email | Email | no |  Not provided while unauthenticated
+Email | | no |  Not provided while unauthenticated
 URL | **Website** | no | absolute URL
 LinkedIn | LinkedIn | no | NOT FETCHED YET
 Facebook | Facebook | no | NOT FETCHED YET
