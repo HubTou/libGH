@@ -11,15 +11,16 @@ Data | libGitHub Field | Required? | Comment
 --- | --- | --- | ---
 Avatar | **Avatar** | no | absolute URL of the profile picture
 Name | **Name** | no | Full name
+Pronouns | Pronouns | no | Not provided while unauthenticated
 Bio | **Biography** | no | can be empty
-Pronouns | - | no | NOT FETCHED YET
 Followers count | **Followers/Count** | no | can be rounded to kilos (or megs?)
 Followers list | Followers/Dict | no | NOT FETCHED YET
 Following count | **Following/Count** | no | can be rounded to kilos (or megs?)
 Following list | | Following/Dict | NOT FETCHED YET
-Company | Company | no | NOT FETCHED YET
+Company | **Company** | no | NOT FETCHED YET
 Location | **Location** | no |
-Email | Email | no | NOT FETCHED YET
+Timezone | **Timezone** | no |
+Email | Email | no |  Not provided while unauthenticated
 URL | **Website** | no | absolute URL
 LinkedIn | LinkedIn | no | NOT FETCHED YET
 Facebook | Facebook | no | NOT FETCHED YET
@@ -42,6 +43,7 @@ repositories | GH/ACCOUNT?tab=repositories
 projects | GH/ACCOUNT?tab=projects
 packages | GH/ACCOUNT?tab=packages
 stars | GH/ACCOUNT?tab=stars
+sponsoring | GH/ACCOUNT?tab=sponsoring
 followers | GH/ACCOUNT?tab=followers
 following | GH/ACCOUNT?tab=following
 achievements | GH/ACCOUNT?tab=achievements
