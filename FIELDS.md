@@ -44,7 +44,7 @@ Sponsoring | Sponsoring | dict | no | NOT FETCHED YET
 Yearly contributions | | | | not available
 Member since year | | | | not available
 
-### Specific URL
+#### Specific URL
 
 Item | URL
 --- | ---
@@ -61,7 +61,19 @@ sponsor | GH/sponsors/ACCOUNT
 
 ## personal accounts repositories
 
-Specific URL:
+GitHub Data | libGitHub Field | Type | Required? | Comment
+--- | --- | --- | --- | ---
+Forked from | **Forked from** | str | no | present for forked repositories
+Description | **Description** | str | no |
+Main programming language | **Programming language** | str | no |
+Stargazers Count | **Stargazers-Count** | int | yes |
+Stargazers List | Stargazers | dict | yes | NOT FETCHED YET
+Forks Count | **Forks-Count** | int | yes |
+Forks List | Forks | dict | yes | NOT FETCHED YET
+License | **License** | str | no |
+Last updated | **Last updated** | str | no |
+
+#### Specific URL
 
 Item | URL
 --- | ---
