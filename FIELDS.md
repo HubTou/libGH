@@ -60,6 +60,7 @@ overview | GH/ACCOUNT?tab=overview&from=AAAA-MM-DD&to=AAAA-MM-DD
 sponsor | GH/sponsors/ACCOUNT
 
 ## personal accounts repositories
+A dictionary where the keys are the repositories names of a personal account.
 
 GitHub Data | libGitHub Field | Type | Required? | Comment
 --- | --- | --- | --- | ---
@@ -105,10 +106,3 @@ People | - | no | NOT FETCHED YET
 
 ## Enterprise accounts
 Yet to be seen!
-
-## Repositories dictionary
-A dictionary where the keys are the repositories names of a personal or organization account.
-
-Data | Field | Required? | Comment
---- | --- | --- | ---
-url | URL | yes |
