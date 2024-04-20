@@ -36,7 +36,7 @@ Achievements | **Achievements** | dict | yes | items have a **Badge** and a **Co
 Highlights | **Highlights** | list of str | yes | [possible values](https://github.com/drknzz/GitHub-Achievements?tab=readme-ov-file#-highlights-badges-)
 Organizations | **Organizations** | dict | yes | items have an **Avatar**
 Repositories Count | **Repositories-Count** | int | yes |
-Repositories List | **Repositories** | dict | yes | see below
+Repositories List | **Repositories** | dict | yes | [see below](https://github.com/HubTou/libGitHub/blob/main/FIELDS.md#personal-accounts-repositories)
 Repositories Stars | **Repositories-Stars** | int | yes | computed from the stargazers of each repository
 Stars Count | **Stars-Count** | int | yes | 
 Stars List | Stars | dict | yes | NOT FETCHED YET
