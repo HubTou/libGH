@@ -86,16 +86,28 @@ GitHub Data | libGitHub Field | type | Required? | Comment
 --- | --- | --- | --- | ---
 Profile picture | **Avatar** | str | no | absolute URL
 Organization display name | **Name** | str | yes |
-Email | | | | NOT FETCHED YET
 Description | **Biography** | str | yes? | can be empty
 Followers count | **Followers-Count** | int | no | can be rounded to kilos (or megs?)
 Followers list | Followers | dict | no | NOT FETCHED YET
 Location | **Location** | str | no |
-URL | **Website** | str | no | absolute URL
+Profile website URL | **Website** | str | no | absolute URL
+Social | **Social** | dict | yes |
+Social: facebook | **Social**/**facebook** | dict | no | items have an **Id** and a **URL**
+Social: Instagram | **Social**/**Instagram** | dict | no | items have an **Id** and a **URL**
+Social: LinkedIn | **Social**/**LinkedIn** | dict | no | items have an **Id** and a **URL**
+Social: Mastodon | **Social**/**Mastodon** | dict | no | items have an **Id** and a **URL**
+Social: Mozilla (Mastodon) | **Social**/**Mozilla** | dict | no | items have an **Id** and a **URL**
+Social: X (Twitter) | **Social**/**X** | dict | no | items have an **Id** and a **URL**
+Social: YouTube | **Social**/**YouTube** | dict | no | items have an **Id** and a **URL**
+Social: others | **Social**/**URL** | list of str | no |
 Repositories Count | **Repositories-Count** | int | yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
 Repositories List | **Repositories** | dict | yes | 
-Teams | | | no | NOT FETCHED YET
-People | | | no | NOT FETCHED YET
+Repositories Stars | **Repositories-Stars** | int | yes | computed from the stargazers of each repository
+Teams Count | | | | not available
+People Count | | | | not available
+People details | | | | not available
+Top languages details | | | | not available
+Most used topics details | | | | not available
 
 #### Specific URL
 
@@ -103,6 +115,25 @@ Item | URL
 --- | ---
 followers | GH/orgs/ACCOUNT/followers
 repositories | GH/orgs/ACCOUNT/repositories?page=X
+
+## personal accounts repositories
+A dictionary where the keys are the repositories names of a personal account.
+
+GitHub Data | libGitHub Field | Type | Required? | Comment
+--- | --- | --- | --- | ---
+Is fork | **Forked from** | str | no | if present the repository is a fork but we don't have the origin
+Description | **Description** | str | no |
+Topics Count | **Topics-Count** | int | yes |
+Topics List | **Topics** | list of str | yes |
+Main programming language | **Programming language** | str | no |
+Stargazers Count | **Stargazers-Count** | int | yes |
+Stargazers List | Stargazers | dict | yes | NOT FETCHED YET
+Forks Count | **Forks-Count** | int | yes |
+Forks List | Forks | dict | yes | NOT FETCHED YET
+Issues Count | **Issues-Count** | int | yes |
+Pull requests Count | **Pull requests-Count** | int | yes |
+License | **License** | str | no |
+Last updated | **Last updated** | str | yes |
 
 ## Enterprise accounts
 Yet to be seen!
