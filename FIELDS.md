@@ -82,27 +82,27 @@ forks | GH/ACCOUNT/REPO/forks
 stargazers | GH/ACCOUNT/REPO/stargazers
 
 ## Organization accounts
-Data | libGitHub Field | Required? | Comment
---- | --- | --- | ---
-Profile picture | **Avatar** | no | absolute URL
-Organization display name | **Name** | yes |
-Email | Email | ? | NOT FETCHED YET
-Description | **Biography** | yes?| can be empty
-Followers count | **Followers/Count** | no | can be rounded to kilos (or megs?)
-Followers list | Followers/Dict | no | NOT FETCHED YET
-Location | **Location** | no |
-URL | **Website** | no | absolute URL
-LinkedIn | LinkedIn | no | NOT FETCHED YET
-Facebook | Facebook | no | NOT FETCHED YET
-Twitter | Twitter | no | NOT FETCHED YET
-Instagram | Instagram | no | NOT FETCHED YET
-Repositories Count | **Repositories/Count** | yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
-Repositories List | **Repositories/Dict** | yes | 
-Discussions | - | no | WON'T BE FETCHED
-Projects | - | no | WON'T BE FETCHED
-Packages | - | no | WON'T BE FETCHED
-Teams | - | no | NOT FETCHED YET
-People | - | no | NOT FETCHED YET
+GitHub Data | libGitHub Field | type | Required? | Comment
+--- | --- | --- | --- | ---
+Profile picture | **Avatar** | str | no | absolute URL
+Organization display name | **Name** | str | yes |
+Email | | | | NOT FETCHED YET
+Description | **Biography** | str | yes? | can be empty
+Followers count | **Followers-Count** | int | no | can be rounded to kilos (or megs?)
+Followers list | Followers | dict | no | NOT FETCHED YET
+Location | **Location** | str | no |
+URL | **Website** | str | no | absolute URL
+Repositories Count | **Repositories-Count** | int | yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
+Repositories List | **Repositories** | dict | yes | 
+Teams | | | no | NOT FETCHED YET
+People | | | no | NOT FETCHED YET
+
+#### Specific URL
+
+Item | URL
+--- | ---
+followers | GH/orgs/ACCOUNT/followers
+repositories | GH/orgs/ACCOUNT/repositories?page=X
 
 ## Enterprise accounts
 Yet to be seen!
