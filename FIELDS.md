@@ -6,134 +6,87 @@ Only Personal and Organization accounts are processed for the moment.
 
 In **bold** what's already available.
 
-## Personal accounts
-GitHub Data | libGitHub Field | Type | Required? | Comment
---- | --- | --- | --- | ---
-Avatar | **Avatar** | str | no | absolute URL of the profile picture
-Name | **Name** | str | no | full name
-Pronouns | | | | not provided while unauthenticated
-Bio | **Biography** | str | no |
-Sponsor | **Sponsor** | boolean | yes | True if the user has a sponsor button 
-Followers count | **Followers-Count** | int | no | can be rounded to kilos (or megs?)
-Followers list | Followers | dict | no | NOT FETCHED YET
-Following count | **Following-Count** | int | no | can be rounded to kilos (or megs?)
-Following list | Following | dict | no | NOT FETCHED YET
-Company | **Company** | str | no |
-Location | **Location** | str | no |
-Timezone | **Timezone** | str | no |
-Public Email | | | | not provided while unauthenticated
-Profile website URL | **Website** | str | no | absolute URL
-Social | **Social** | dict | yes |
-Social: facebook | **Social**/**facebook** | dict | no | items have an **Id** and a **URL**
-Social: Instagram | **Social**/**Instagram** | dict | no | items have an **Id** and a **URL**
-Social: LinkedIn | **Social**/**LinkedIn** | dict | no | items have an **Id** and a **URL**
-Social: Mastodon | **Social**/**Mastodon** | dict | no | items have an **Id** and a **URL**
-Social: Mozilla (Mastodon) | **Social**/**Mozilla** | dict | no | items have an **Id** and a **URL**
-Social: X (Twitter) | **Social**/**X** | dict | no | items have an **Id** and a **URL**
-Social: YouTube | **Social**/**YouTube** | dict | no | items have an **Id** and a **URL**
-Social: others | **Social**/**URL** | list of str | no |
-Achievements | **Achievements** | dict | yes | items have a **Badge** and a **Count**. [Possible values](https://github.com/drknzz/GitHub-Achievements?tab=readme-ov-file#-achievement-list-)
-Highlights | **Highlights** | list of str | yes | [possible values](https://github.com/drknzz/GitHub-Achievements?tab=readme-ov-file#-highlights-badges-)
-Organizations | **Organizations** | dict | yes | items have an **Avatar**
-Repositories Count | **Repositories-Count** | int | yes |
-Repositories List | **Repositories** | dict | yes | [see below](https://github.com/HubTou/libGitHub/blob/main/FIELDS.md#personal-accounts-repositories)
-Repositories Stars | **Repositories-Stars** | int | yes | computed from the stargazers of each repository
-Stars Count | **Stars-Count** | int | yes | 
-Stars List | Stars | dict | yes | NOT FETCHED YET
-Sponsoring | Sponsoring | dict | no | NOT FETCHED YET
-Yearly contributions | | | | not available
-Member since year | | | | not available
+## Accounts
+GitHub Data | Perso. | Orga. | libGitHub Field | Type | Comment
+--- | --- | --- | --- | --- | ---
+&nbsp; | yes | yes | **account_type** | str | "personal" or "organization"
+Avatar | yes | | **avatar** | str | absolute URL of the profile picture
+Profile picture | | yes | **avatar** | str | absolute URL of the profile picture
+Name | yes | | **name** | str | full name
+Organization display name | | yes | **name** | str | |
+Pronouns | yes | no | | | not provided while unauthenticated
+Bio | yes | | **biography** | str | |
+Description | | yes | **biography** | str | 
+Sponsor | yes | no | **sponsor** | boolean | True if the user has a sponsor button 
+Followers count | yes | yes | **followers_count** | int | can be rounded to kilos (or megs?)
+Followers list | yes | yes | followers | dict | NOT FETCHED YET
+Following count | yes | no | **following_count** | int | can be rounded to kilos (or megs?)
+Following list | yes | no | following | dict | NOT FETCHED YET
+Company | yes | no | **company** | str |
+Location | yes | yes | **location** | str | 
+Timezone | yes | no | **timezone** | str |
+Public Email | yes | no | | | not provided while unauthenticated
+Profile website URL | yes | yes | **website** | str | absolute URL
+Social | yes | yes | **social** | dict | yes |
+Social: facebook | yes | yes | **social**/**facebook** | dict | items have an **id** and a **url**
+Social: Instagram | yes | yes | **social**/**instagram** | dict | items have an **id** and a **url**
+Social: LinkedIn | yes | yes | **social**/**linkedin** | dict | items have an **id** and a **url**
+Social: Mastodon | yes | yes | **social**/**mastodon** | dict | items have an **id** and a **url**
+Social: Mozilla (Mastodon) | yes | yes | **social**/**mozilla** | dict | items have an **id** and a **url**
+Social: X (Twitter) | yes | yes | **social**/**x** | dict | items have an **id** and a **url**
+Social: YouTube | yes | yes | **social**/**youtube** | dict | items have an **id** and a **url**
+Social: others | yes | yes | **social**/**url** | list of str |
+Achievements | yes | no | **achievements** | dict | items have a **badge** and a **count**. [Possible values](https://github.com/drknzz/GitHub-Achievements?tab=readme-ov-file#-achievement-list-)
+Highlights | yes | no | **highlights** | list of str | [possible values](https://github.com/drknzz/GitHub-Achievements?tab=readme-ov-file#-highlights-badges-)
+Organizations | yes | no | **organizations** | dict | items have an **avatar**
+Repositories Count | yes | yes | **repositories_count** | int | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
+Repositories List | yes | yes | **repositories** | dict |
+Repositories Stars | yes | yes | **repositories_stars** | int | computed from each repository
+Stars Count | yes | no | **stars_count** | int |
+Stars List | yes | no | stars | dict | NOT FETCHED YET
+Sponsoring | yes | no | sponsoring | dict | NOT FETCHED YET
+Yearly contributions | yes | no | | | not available
+Member since year | yes | no | | | not available
+Teams Count | no | yes | | | not available
+People Count | no | yes | | | not available
+People details | no | yes | | | not available
+Top languages | (yes) | yes | **top_languages** | dict | computed from each repository. By decreasing number of repositories
+Most used topics | (yes) | yes | **most_used_topics** | dict | computed from each repository. By decreasing number of repositories
 
-#### Specific URL
+## Repositories
+A dictionary where the keys are the repositories names.
 
-Item | URL
---- | ---
-repositories | GH/ACCOUNT?tab=repositories
-projects | GH/ACCOUNT?tab=projects
-packages | GH/ACCOUNT?tab=packages
-stars | GH/ACCOUNT?tab=stars
-sponsoring | GH/ACCOUNT?tab=sponsoring
-followers | GH/ACCOUNT?tab=followers
-following | GH/ACCOUNT?tab=following
-achievements | GH/ACCOUNT?tab=achievements
-overview | GH/ACCOUNT?tab=overview&from=AAAA-MM-DD&to=AAAA-MM-DD
-sponsor | GH/sponsors/ACCOUNT
+GitHub Data | Perso. | Orga. | libGitHub Field | Type | Comment
+--- | --- | --- | --- | --- | ---
+Forked from | yes | | **forked_from** | str | present for forked repositories
+Is fork | | yes | **forked_from** | str | if present the repository is a fork but we don't have the origin
+Description | yes | yes | **description** | str |
+Topics List | yes | yes | **topics** | list of str | may be partial
+Topics Count | no | yes | **topics_count** | int | 
+Main programming language | yes | yes | **programming_language** | str |
+Stargazers Count | yes | yes | **stargazers_count** | int |
+Stargazers List | yes | yes | stargazers | dict | NOT FETCHED YET
+Forks Count | yes | yes | **forks_count** | int |
+Forks List | yes | yes | forks | dict | NOT FETCHED YET
+Issues Count | no | yes | **issues_count** | int |
+Pull requests Count | no | yes | **pull_requests_count** | int |
+License | yes | yes | **license** | str |
+Last updated | yes | yes | **last_updated** | str |
 
-## personal accounts repositories
-A dictionary where the keys are the repositories names of a personal account.
-
-GitHub Data | libGitHub Field | Type | Required? | Comment
---- | --- | --- | --- | ---
-Forked from | **Forked from** | str | no | present for forked repositories
-Description | **Description** | str | no |
-Main programming language | **Programming language** | str | no |
-Stargazers Count | **Stargazers-Count** | int | yes |
-Stargazers List | Stargazers | dict | yes | NOT FETCHED YET
-Forks Count | **Forks-Count** | int | yes |
-Forks List | Forks | dict | yes | NOT FETCHED YET
-License | **License** | str | no |
-Last updated | **Last updated** | str | no |
-
-#### Specific URL
-
-Item | URL
---- | ---
-forks | GH/ACCOUNT/REPO/forks
-stargazers | GH/ACCOUNT/REPO/stargazers
-
-## Organization accounts
-GitHub Data | libGitHub Field | type | Required? | Comment
---- | --- | --- | --- | ---
-Profile picture | **Avatar** | str | no | absolute URL
-Organization display name | **Name** | str | yes |
-Description | **Biography** | str | yes? | can be empty
-Followers count | **Followers-Count** | int | no | can be rounded to kilos (or megs?)
-Followers list | Followers | dict | no | NOT FETCHED YET
-Location | **Location** | str | no |
-Profile website URL | **Website** | str | no | absolute URL
-Social | **Social** | dict | yes |
-Social: facebook | **Social**/**facebook** | dict | no | items have an **Id** and a **URL**
-Social: Instagram | **Social**/**Instagram** | dict | no | items have an **Id** and a **URL**
-Social: LinkedIn | **Social**/**LinkedIn** | dict | no | items have an **Id** and a **URL**
-Social: Mastodon | **Social**/**Mastodon** | dict | no | items have an **Id** and a **URL**
-Social: Mozilla (Mastodon) | **Social**/**Mozilla** | dict | no | items have an **Id** and a **URL**
-Social: X (Twitter) | **Social**/**X** | dict | no | items have an **Id** and a **URL**
-Social: YouTube | **Social**/**YouTube** | dict | no | items have an **Id** and a **URL**
-Social: others | **Social**/**URL** | list of str | no |
-Repositories Count | **Repositories-Count** | int | yes | For some reason the count is unavailable in machine fetched pages, but still appears in another place. Sometimes different from what appears in detail pages
-Repositories List | **Repositories** | dict | yes | 
-Repositories Stars | **Repositories-Stars** | int | yes | computed from the stargazers of each repository
-Teams Count | | | | not available
-People Count | | | | not available
-People details | | | | not available
-Top languages details | | | | not available
-Most used topics details | | | | not available
-
-#### Specific URL
-
-Item | URL
---- | ---
-followers | GH/orgs/ACCOUNT/followers
-repositories | GH/orgs/ACCOUNT/repositories?page=X
-
-## personal accounts repositories
-A dictionary where the keys are the repositories names of a personal account.
-
-GitHub Data | libGitHub Field | Type | Required? | Comment
---- | --- | --- | --- | ---
-Is fork | **Forked from** | str | no | if present the repository is a fork but we don't have the origin
-Description | **Description** | str | no |
-Topics Count | **Topics-Count** | int | yes |
-Topics List | **Topics** | list of str | yes |
-Main programming language | **Programming language** | str | no |
-Stargazers Count | **Stargazers-Count** | int | yes |
-Stargazers List | Stargazers | dict | yes | NOT FETCHED YET
-Forks Count | **Forks-Count** | int | yes |
-Forks List | Forks | dict | yes | NOT FETCHED YET
-Issues Count | **Issues-Count** | int | yes |
-Pull requests Count | **Pull requests-Count** | int | yes |
-License | **License** | str | no |
-Last updated | **Last updated** | str | yes |
-
-## Enterprise accounts
-Yet to be seen!
+## Specific URL
+Item | Perso. | Orga. | URL
+--- | --- | --- | ---
+repositories | yes | | GH/ACCOUNT?tab=repositories
+repositories | | yes | GH/orgs/ACCOUNT/repositories?page=X
+projects | yes | | GH/ACCOUNT?tab=projects
+packages | yes | | GH/ACCOUNT?tab=packages
+stars | yes | no | GH/ACCOUNT?tab=stars
+sponsoring | yes | no | GH/ACCOUNT?tab=sponsoring
+followers | yes | | GH/ACCOUNT?tab=followers
+followers | | yes | GH/orgs/ACCOUNT/followers
+following | yes | no | GH/ACCOUNT?tab=following
+achievements | yes | no | GH/ACCOUNT?tab=achievements
+overview | yes | no | GH/ACCOUNT?tab=overview&from=AAAA-MM-DD&to=AAAA-MM-DD
+sponsor | yes | no | GH/sponsors/ACCOUNT
+forks | yes | yes | GH/ACCOUNT/REPO/forks
+stargazers | yes | yes | GH/ACCOUNT/REPO/stargazers
