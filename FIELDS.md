@@ -69,7 +69,7 @@ Topics Count | no | yes | yes | **topics_count** | int |
 Contributors Count | no | no | yes | **contributors_count** | int |
 Contributors list | no | no | yes | contributors | dict | NOT FETCHED YET
 Main programming language | yes | yes | yes | **programming_language** | str |
-Languages | no | no | yes | **languages** | dict | key = language (str), value = percentage (str)
+Languages | no | no | yes | **languages** | dict | key = language (str), value = percentage (float)
 Stargazers Count | yes | yes | yes | **stargazers_count** | int |
 Stargazers List | yes | yes | yes | stargazers | dict | NOT FETCHED YET
 Watching Count | no | no | yes | **watching_count** | int |
