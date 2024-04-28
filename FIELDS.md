@@ -65,10 +65,15 @@ Is fork | | yes | | **forked_from** | str | if present the repository is a fork 
 Description | yes | yes | yes | **description** | str |
 Software website URL | no | no | yes | **website** | absolute URL
 Topics List | yes | yes | yes | **topics** | list of str | may be partial unless taken from the repository page
-Topics Count | no | yes | yes | **topics_count** | int | 
-Main programming language | yes | yes | | **programming_language** | str |
+Topics Count | no | yes | yes | **topics_count** | int |
+Contributors Count | no | no | yes | **contributors_count** | int |
+Contributors list | no | no | yes | contributors | dict | NOT FETCHED YET
+Main programming language | yes | yes | yes | **programming_language** | str |
+Languages | no | no | yes | **languages** | dict | key = language (str), value = percentage (str)
 Stargazers Count | yes | yes | yes | **stargazers_count** | int |
 Stargazers List | yes | yes | yes | stargazers | dict | NOT FETCHED YET
+Watching Count | no | no | yes | **watching_count** | int |
+Watching List | no | no | yes | watching | dict | NOT FETCHED YET
 Forks Count | yes | yes | yes | **forks_count** | int |
 Forks List | yes | yes | yes | forks | dict | NOT FETCHED YET
 Issues Count | no | yes | yes | **issues_count** | int |
