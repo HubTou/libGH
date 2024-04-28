@@ -56,22 +56,25 @@ Most used topics | (yes) | yes | **most_used_topics** | dict | computed from eac
 ## Repositories
 A dictionary where the keys are the repositories names.
 
-GitHub Data | Perso. | Orga. | libGitHub Field | Type | Comment
---- | --- | --- | --- | --- | ---
-Forked from | yes | | **forked_from** | str | present for forked repositories
-Is fork | | yes | **forked_from** | str | if present the repository is a fork but we don't have the origin
-Description | yes | yes | **description** | str |
-Topics List | yes | yes | **topics** | list of str | may be partial
-Topics Count | no | yes | **topics_count** | int | 
-Main programming language | yes | yes | **programming_language** | str |
-Stargazers Count | yes | yes | **stargazers_count** | int |
-Stargazers List | yes | yes | stargazers | dict | NOT FETCHED YET
-Forks Count | yes | yes | **forks_count** | int |
-Forks List | yes | yes | forks | dict | NOT FETCHED YET
-Issues Count | no | yes | **issues_count** | int |
-Pull requests Count | no | yes | **pull_requests_count** | int |
-License | yes | yes | **license** | str |
-Last updated | yes | yes | **last_updated** | str |
+In the table below, the *Repo.* column is for direct repository page scraping.
+
+GitHub Data | Perso. | Orga. | Repo. | libGitHub Field | Type | Comment
+--- | --- | --- | --- | --- | --- | ---
+Forked from | yes | | | **forked_from** | str | present for forked repositories
+Is fork | | yes | | **forked_from** | str | if present the repository is a fork but we don't have the origin
+Description | yes | yes | yes | **description** | str |
+Software website URL | no | no | yes | **website** | absolute URL
+Topics List | yes | yes | yes | **topics** | list of str | may be partial unless taken from the repository page
+Topics Count | no | yes | yes | **topics_count** | int | 
+Main programming language | yes | yes | | **programming_language** | str |
+Stargazers Count | yes | yes | yes | **stargazers_count** | int |
+Stargazers List | yes | yes | yes | stargazers | dict | NOT FETCHED YET
+Forks Count | yes | yes | yes | **forks_count** | int |
+Forks List | yes | yes | yes | forks | dict | NOT FETCHED YET
+Issues Count | no | yes | yes | **issues_count** | int |
+Pull requests Count | no | yes | yes | **pull_requests_count** | int |
+License | yes | yes | | **license** | str |
+Last updated | yes | yes | | **last_updated** | str |
 
 ## Specific URL
 Item | Perso. | Orga. | URL
