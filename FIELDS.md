@@ -60,7 +60,7 @@ In the table below, the *Repo.* column is for direct repository page scraping.
 
 GitHub Data | Perso. | Orga. | Repo. | libGitHub Field | Type | Comment
 --- | --- | --- | --- | --- | --- | ---
-Forked from | yes | | | **forked_from** | str | present for forked repositories
+Forked from | yes | | yes | **forked_from** | str | present for forked repositories
 Is fork | | yes | | **forked_from** | str | if present the repository is a fork but we don't have the origin
 Description | yes | yes | yes | **description** | str |
 Software website URL | no | no | yes | **website** | absolute URL
@@ -74,12 +74,18 @@ Stargazers Count | yes | yes | yes | **stargazers_count** | int |
 Stargazers List | yes | yes | yes | stargazers | dict | NOT FETCHED YET
 Watching Count | no | no | yes | **watching_count** | int |
 Watching List | no | no | yes | watching | dict | NOT FETCHED YET
+Releases Count | no | no | yes | **releases_count** | int |
+Last release name | no | no | yes | **last_release_name** | str |
+Last release date | no | no | yes | **last_release_date** | str | datetime
+Packages Count | no | no | yes | **packages_count** | int |
+Sponsor Button | no | no | yes | **is_sponsorable** | boolean |
 Forks Count | yes | yes | yes | **forks_count** | int |
 Forks List | yes | yes | yes | forks | dict | NOT FETCHED YET
 Issues Count | no | yes | yes | **issues_count** | int |
 Pull requests Count | no | yes | yes | **pull_requests_count** | int |
-License | yes | yes | | **license** | str |
-Last updated | yes | yes | | **last_updated** | str |
+License | yes | yes | yes | **license** | str | "specific" is used for any non-standard license
+Last updated | yes | yes | no | **last_updated** | str |
+Commits Count | no | no | yes | **commits_count** | int |
 
 ## Specific URL
 Item | Perso. | Orga. | URL
