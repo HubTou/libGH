@@ -84,6 +84,8 @@ Forks List | yes | yes | yes | forks | dict | NOT FETCHED YET
 Issues Count | no | yes | yes | **issues_count** | int |
 Pull requests Count | no | yes | yes | **pull_requests_count** | int |
 License | yes | yes | yes | **license** | str | "specific" is used for any non-standard license
+Branches Count | no | no | yes | | | not available
+Tags Count | no | no | yes | | | not available
 Last updated | yes | yes | no | **last_updated** | str |
 Commits Count | no | no | yes | **commits_count** | int |
 
