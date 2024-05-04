@@ -99,4 +99,4 @@ Sponsor | yes | | GH/sponsors/ACCOUNT
 Sponsoring | yes | | GH/ACCOUNT?tab=sponsoring
 Stargazers | yes | yes | GH/ACCOUNT/REPO/stargazers
 Stars | yes | | GH/ACCOUNT?tab=stars
-Watchers [ yes | yes | GH/ACCOUNT/REPO/watchers
+Watchers | yes | yes | GH/ACCOUNT/REPO/watchers
