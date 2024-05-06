@@ -1,15 +1,15 @@
 # GitHub data
-In **bold** what's made available.
+The libGH fields names in **bold** are those available in the current version.
 
 ## Accounts
 Data is returned as a dictionary where the keys are the accounts nicknames (eg. https://github.com/NICKNAME).
 
-GitHub Data | Perso. | Orga. | libGitHub Field | Type | Comment
+GitHub Data | Perso. | Orga. | libGH Field | Type | Comment
 --- | --- | --- | --- | --- | ---
 &nbsp; | yes | yes | **account_type** | str | "personal" or "organization"
 Avatar / Profile picture | yes | yes | **avatar** | str | absolute URL of the profile picture
 Name | yes | yes | **name** | str | full name
-Pronouns | yes | | | | not provided while unauthenticated
+Pronouns | yes | | | | NOT PROVIDED WHILE UNAUTHENTICATED
 Bio / Description | yes | yes | **biography** | str | |
 Sponsor | yes | | **sponsor** | boolean | True if the user has a sponsor button 
 Followers count | yes | yes | **followers_count** | int | can be rounded to kilos (or megs?)
@@ -19,9 +19,9 @@ Following list | yes | | following | dict | NOT FETCHED YET
 Company | yes | | **company** | str |
 Location | yes | yes | **location** | str | 
 Timezone | yes | | **timezone** | str |
-Public Email | yes | | | | not provided while unauthenticated
+Public Email | yes | | | | NOT PROVIDED WHILE UNAUTHENTICATED
 Profile website URL | yes | yes | **website** | str | absolute URL
-Social | yes | yes | **social** | dict | yes |
+Social | yes | yes | **social** | dict 
 Social: facebook | yes | yes | **social**/**facebook** | dict | items have an **id** and a **url**
 Social: Instagram | yes | yes | **social**/**instagram** | dict | items have an **id** and a **url**
 Social: LinkedIn | yes | yes | **social**/**linkedin** | dict | items have an **id** and a **url**
@@ -39,11 +39,11 @@ Repositories Stars | yes | yes | **repositories_stars** | int | computed from ea
 Stars Count | yes | | **stars_count** | int |
 Stars List | yes | | stars | dict | NOT FETCHED YET
 Sponsoring | yes | | sponsoring | dict | NOT FETCHED YET
-Yearly contributions | yes | | | | not available
-Member since year | yes | | | | not available
-Teams Count | | yes | | | not available
-People Count | | yes | | | not available
-People details | | yes | | | not available
+Yearly contributions | yes | | | | NOT AVAILABLE
+Member since year | yes | | | | NOT AVAILABLE
+Teams Count | | yes | | | NOT AVAILABLE
+People Count | | yes | | | NOT AVAILABLE
+People details | | yes | | | NOT AVAILABLE
 Top languages | (yes) | yes | **top_languages** | dict | computed from each repository. By decreasing number of repositories
 Most used topics | (yes) | yes | **most_used_topics** | dict | computed from each repository. By decreasing number of repositories
 
@@ -52,12 +52,12 @@ Data is returned as a dictionary where the keys are the repositories names.
 
 In the table below, the *Repo.* column is for direct repository page scraping.
 
-GitHub Data | Perso. | Orga. | Repo. | libGitHub Field | Type | Comment
+GitHub Data | Perso. | Orga. | Repo. | libGH Field | Type | Comment
 --- | --- | --- | --- | --- | --- | ---
 Forked from | yes | | yes | **forked_from** | str | present for forked repositories
 Is fork | | yes | | **forked_from** | str | if present the repository is a fork but we don't have the origin
 Description | yes | yes | yes | **description** | str |
-Software website URL | | | yes | **website** | absolute URL
+Software website URL | | | yes | **website** | str | absolute URL
 Topics List | yes | yes | yes | **topics** | list of str | may be partial unless taken from the repository page
 Topics Count | | yes | yes | **topics_count** | int |
 Contributors Count | | | yes | **contributors_count** | int |
@@ -78,8 +78,8 @@ Forks List | yes | yes | yes | forks | dict | NOT FETCHED YET
 Issues Count | | yes | yes | **issues_count** | int |
 Pull requests Count | | yes | yes | **pull_requests_count** | int |
 License | yes | yes | yes | **license** | str | "specific" is used for any non-standard license
-Branches Count | | | yes | | | not available
-Tags Count | | | yes | | | not available
+Branches Count | | | yes | | | NOT AVAILABLE
+Tags Count | | | yes | | | NOT AVAILABLE
 Last updated | yes | yes | | **last_updated** | str |
 Commits Count | | | yes | **commits_count** | int |
 
