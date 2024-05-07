@@ -62,7 +62,7 @@ The *cache_days* parameters indicate the number of days a content should be serv
 
 The *force_fetch* parameters indicate if contents should be refreshed from the Web regardless of their age (but their results will be cached).
 
-The *cache_index* parameters indicate if an *index.txt* file should be generated to desribe what's stored in the cache (it's only for human readability purposes).
+The *cache_index* parameters indicate if an *index.txt* file should be generated to describe what's stored in the cache (it's only for human readability purposes).
 
 ### RATE-LIMITING PARAMETERS
 
