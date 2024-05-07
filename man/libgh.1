@@ -1,0 +1,195 @@
+.Dd May 7, 2024
+.Dt LIBGH 1
+.Os
+.Sh NAME
+.Nm libgh
+.Nd GitHub scraping tool
+.Sh SYNOPSIS
+.Nm
+.Op Fl \-days|\-d Ar DAYS
+.Op Fl \-force|\-f
+.Op Fl \-from
+.Op Fl \-json|\-j
+.Op Fl \-prune|\-p
+.Op Fl \-repo|\-r
+.Op Fl \-topics
+.Op Fl \-xml|\-x
+.Op Fl \-debug
+.Op Fl \-help|\-?
+.Op Fl \-version
+.Op Fl \-
+.Ar account_or_repository
+.Op Ar ...
+.Pp
+The alias
+.Em lgh
+is also available to shorten the command name.
+.Sh DESCRIPTION
+The
+.Nm
+command\-line utility scraps data from a list of GitHub
+accounts (either personal or organizational) or repositories if the
+.Op Fl \-repo|\-r
+option is used.
+.Pp
+By default this data is returned as pretty\-printed text, or JSON data
+if the
+.Op Fl \-json|\-j
+option is used, or XML data if the
+.Op Fl \-xml|\-x
+option is used.
+.Pp
+As data is retrieved in unauthenticated mode, some of it may be missing.
+For instance, organizational accounts will not mention the origin of
+forked repositories and may come with partial repositories topics. The
+.Op Fl \-from
+and
+.Op Fl \-topics
+options will enable additional repository scraping in order to provide
+these information.
+.Pp
+The GitHub Web site is applying rate limiting rules. To comply with
+its policies no more than 60 requests per hour, with at least a
+1 second interval between requests, will be performed. The tool
+will also maintain a caching directory of requests results, which
+it will reuse for 7 days or the
+.Op Fl \-days|\-d
+option parameter.
+A value of 0 will instruct the tool not to use caching, while the
+.Op Fl \-force|\-f
+option will force reloading the resources requested. The
+.Op Fl \-debug
+option will show if a resource comes from the cache or the Web,
+as well as the number of Web requests made to GitHub per day, hour
+and minute.
+.Pp
+The cache can be trimmed to the 7 days or
+.Op Fl \-days|\-d
+parameter value with the
+.Op Fl \-prune|\-p
+option. The pages are stored as XZ compressed files in order to
+reduce disk usage.
+.Ss OPTIONS
+.Op Fl \-days|\-d Ar DAYS
+Set number of caching days (0=don't use cache)
+.Pp
+.Op Fl \-force|\-f
+Force fetching URL instead of using cache
+.Pp
+.Op Fl \-from
+Load repositories when forked_from is blank
+.Pp
+.Op Fl \-json|\-j
+Switch to JSON output instead of plain text
+.Pp
+.Op Fl \-prune|\-p
+Prune cache items olday than DAYS and cache index
+.Pp
+.Op Fl \-repo|\-r
+Process repositories instead of accounts
+.Pp
+.Op Fl \-topics
+Load repositories when there are missing topics
+.Pp
+.Op Fl \-xml|\-x
+Switch to XML output instead of plain text
+.Pp
+.Op Fl \-debug
+Enable debug mode
+.Pp
+.Op Fl \-help|\-?
+Print usage and this help message and exit
+.Pp
+.Op Fl \-version
+Print version and exit
+.Pp
+.Op Fl \-
+Options processing terminator
+.Sh ENVIRONMENT
+The
+.Ev LOCALAPPDATA
+and
+.Ev TMP
+environment variables under Windows, and
+.Ev HOME ,
+.Ev TMPDIR
+and
+.Ev TMP
+environment variables under other operating systems
+can influence the caching directory used.
+.Sh FILES
+The
+.Nm
+utility will attempt to maintain a caching directory
+for the web requests it makes.
+.Pp
+This directory will be located in one of the following places:
+.Bl -bullet
+.It
+Unix:
+.Bl -bullet
+.It
+.Pa ${HOME}/.cache/libgh
+.It
+.Pa ${TMPDIR}/.cache/libgh
+.It
+.Pa ${TMP}/.cache/libgh
+.El
+.It
+Windows:
+.Bl -bullet
+.It
+.Pa %LOCALAPPDATA%/cache/libgh
+.It
+.Pa %TMP%/cache/libgh
+.El
+.El
+.Pp
+An
+.Pa index.txt
+file will make the correspondence between URL and files.
+.Sh EXIT STATUS
+.Ex -std libgh
+.Sh EXAMPLES
+To extract data from a personal GitHub account named
+.Em HubTou
+in all possible output formats, do:
+.Bd -literal
+$ lgh \-\-debug HubTou > libgh.txt
+$ lgh \-\-debug \-\-json HubTou > libgh.json
+$ lgh \-\-debug \-\-xml HubTou > libgh.xml
+.Ed
+.Pp
+Results for this example are available there:
+.Bl -bullet
+.It
+.Lk https://www.frbsd.org/xch/libgh.txt
+.It
+.Lk https://www.frbsd.org/xch/libgh.json
+.It
+.Lk https://www.frbsd.org/xch/libgh.xml
+.El
+.Sh SEE ALSO
+.Xr fetch 1 ,
+.Xr curl 1
+.Sh STANDARDS
+The
+.Nm
+utility is not a standard UNIX command.
+.Pp
+This implementation tries to follow the PEP 8 style guide for Python code.
+.Sh PORTABILITY
+To be tested under Windows.
+.Sh HISTORY
+This implementation was made for the
+.Lk https://github.com/HubTou/PNU PNU project
+.Pp
+It's intended as the scraping engine for another tool.
+.Sh LICENSE
+It is available under the 3\-clause BSD license.
+.Sh AUTHORS
+.An Hubert Tournier
+.Lk https://github.com/HubTou
+.Sh CAVEATS
+Some information are not available in unauthenticated mode and the rate limits
+per hour are quite low, but it should be fine anyway for most usages.

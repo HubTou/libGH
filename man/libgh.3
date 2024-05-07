@@ -1,0 +1,262 @@
+.Dd May 7, 2024
+.Dt LIBGH 3
+.Os
+.Sh NAME
+.Nm libgh
+.Nd GitHub scraping library
+.Sh SYNOPSIS
+.Em import libgh
+.Pp
+.Ft Dict
+.Fo libgh.load_account
+.Fa "String account_name"
+.Fa "Integer cache_days"
+.Fa "Boolean force_fetch=False"
+.Fa "List complete=[]"
+.Fc
+.Ft Dict
+.Fo libgh.load_accounts
+.Fa "List accounts_list"
+.Fa "Integer cache_days"
+.Fa "Boolean force_fetch=False"
+.Fa "List complete=[]"
+.Fc
+.Ft Dict
+.Fo libgh.load_repository
+.Fa "String account_name"
+.Fa "String repository_name"
+.Fa "Integer cache_days"
+.Fa "Boolean force_fetch=False"
+.Fc
+.Ft Dict
+.Fo libgh.load_repositories
+.Fa "List repositories_list"
+.Fa "Integer cache_days"
+.Fa "Boolean force_fetch=False"
+.Fc
+.Pp
+The following more generic functions will be moved into the
+.Lb libpnu
+in a future version:
+.Pp
+.Ft Bytes ,
+.Ft ListOfTuples
+.Fo libgh.get_url_bdata
+.Fa "String url"
+.Fa "String cache_dir"
+.Fa "Dict headers={}"
+.Fa "Integer cache_days=1"
+.Fa "Boolean cache_index=False"
+.Fa "Boolean force_fetch=False"
+.Fa "Integer min_delay=0"
+.Fa "Integer max_per_minute=-1"
+.Fa "Integer max_per_hour=-1"
+.Fa "Integer max_per_day=-1"
+.Fa "Integer timeout=15"
+.Fc
+.Ft String ,
+.Ft ListOfTuples
+.Fo libgh.get_url_data
+.Fa "String url"
+.Fa "String cache_dir"
+.Fa "Dict headers={}"
+.Fa "Integer cache_days=1"
+.Fa "Boolean cache_index=False"
+.Fa "Boolean force_fetch=False"
+.Fa "Integer min_delay=0"
+.Fa "Integer max_per_minute=-1"
+.Fa "Integer max_per_hour=-1"
+.Fa "Integer max_per_day=-1"
+.Fa "Integer timeout=15"
+.Fc
+.Ft Void
+.Fo libgh.prune_cache
+.Fa "String cache_dir"
+.Fa "Integer cache_days"
+.Fc
+.Ft List
+.Fo libgh.collection2xml
+.Fa "Collection data"
+.Fa "String name='root'"
+.Fa "Integer depth=0"
+.Fa "Integer indent_size=2"
+.Fa "Boolean show_types=False"
+.Fc
+.Sh DESCRIPTION
+The
+.Fn load_account
+function returns a dictionary of account information.
+.Pp
+The
+.Fn load_accounts
+function returns a dictionary of accounts information.
+.Pp
+The
+.Fa complete
+parameters contains a list of optional contents to download.
+It currently only applies to organizational accounts and can contain the
+strings "forked_from" and "topics" if an additional request is to be
+performed to complete missing information from accounts requests.
+.Pp
+The
+.Fn load_repository
+function returns a dictionary of repository information.
+.Pp
+The
+.Fn load_repositories
+function returns a dictionary of repositories information.
+.Pp
+The
+.Fn get_url_bdata
+function returns an URL binary data and HTTP headers from a recent cache file
+or from the Web.
+.Pp
+The
+.Fn get_url_data
+function returns an URL text data and HTTP headers from a recent cache file
+or from the Web.
+.Pp
+A dictionary of additional headers (typically for setting session cookies)
+can be provided in the optional
+.Fa headers
+parameters.
+.Pp
+The
+.Fn prune_cache
+function removes old files and their index entries, and unused directories
+from the caching directory.
+.Pp
+The
+.Fn collection2xml
+function returns the collection data type as a list of XML lines.
+The currently supported collection data types are dict, list, tuple, set,
+frozenset. The name of the root element can be indicated with the
+.Fa name
+parameter. The number of spaces per identation level can be indicated with the
+.Fa indent_size
+parameter. The elements' type can be optionally included as a tag property
+with the
+.Fa show_types
+parameter.
+.Pp
+All parameters with default values are optional.
+.Ss CACHING PARAMETERS
+The
+.Fa cache_dir
+parameters indicate the name of a subdirectory in the caching directory
+intended to isolate the calling program's usage.
+.Pp
+The
+.Fa cache_days
+parameters indicate the number of days a content should be served from the
+cache before being refreshed from the Web. A value of 0 means to disable
+caching functionalities.
+.Pp
+The
+.Fa force_fetch
+parameters indicate if contents should be refreshed from the Web regardless
+of their age (but their results will be cached).
+.Pp
+The
+.Fa cache_index
+parameters indicate if an
+.Pa index.txt
+file should be generated to describe what's stored in the cache (it's only
+for human readability purposes).
+.Ss RATE-LIMITING PARAMETERS
+The
+.Fa min_delay
+parameters indicate the number of seconds to be waited between requests
+to a specific Web site. 0 means no delay.
+.Pp
+The
+.Fa max_per_day ,
+.Fa max_per_hour
+and
+.Fa max_per_minute
+parameters indicate the cumulated number of requests to a specific Web site
+that can be made per time period. -1 means no limit.
+.Pp
+The
+.Fa timeout
+parameters indicate the maximum number of seconds to wait for an answer
+from a Web site, before raising a
+.Em LookupError
+exception.
+.Pp
+Triggering rate limiting will likely raise a
+.Em PermissionError
+exception.
+.Sh ENVIRONMENT
+The
+.Ev LOCALAPPDATA
+and
+.Ev TMP
+environment variables under Windows, and
+.Ev HOME ,
+.Ev TMPDIR
+and
+.Ev TMP
+environment variables under other operating systems
+can influence the caching directory used.
+.Sh FILES
+The
+.Lb libgh
+will attempt to maintain a caching directory for the web requests it makes.
+.Pp
+This directory will be located in one of the following places:
+.Bl -bullet
+.It
+Unix:
+.Bl -bullet
+.It
+.Pa ${HOME}/.cache/libgh
+.It
+.Pa ${TMPDIR}/.cache/libgh
+.It
+.Pa ${TMP}/.cache/libgh
+.El
+.It
+Windows:
+.Bl -bullet
+.It
+.Pa %LOCALAPPDATA%/cache/libgh
+.It
+.Pa %TMP%/cache/libgh
+.El
+.El
+.Pp
+An
+.Pa index.txt
+file will make the correspondence between URL and files.
+.Sh EXAMPLES
+A function call
+.Fo load_account
+.Fa "HubTou"
+.Fa 1
+.Fc
+on a personal GitHub account named
+.Em HubTou
+returns this dictionary of account information:
+.Lk https://www.frbsd.org/xch/libgh.txt
+.Sh STANDARDS
+The
+.Lb libgh
+is not a standard UNIX one.
+.Pp
+This implementation tries to follow the PEP 8 style guide for Python code.
+.Sg PORTABILITY
+To be tested under Windows.
+.Sh HISTORY
+This library was made for the
+.Lk https://github.com/HubTou/PNU PNU project
+.Pp
+It's intended as the scraping engine for another tool.
+.Sh LICENSE
+This library is available under the 3\-clause BSD license.
+.Sh AUTHORS
+.An Hubert Tournier
+.Lk https://github.com/HubTou
+.Sh CAVEATS
+Some information are not available in unauthenticated mode and the rate limits
+per hour are quite low, but it should be fine anyway for most usages.
