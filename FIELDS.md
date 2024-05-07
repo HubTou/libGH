@@ -11,17 +11,17 @@ Avatar / Profile picture | yes | yes | **avatar** | str | absolute URL of the pr
 Name | yes | yes | **name** | str | full name
 Pronouns | yes | | | | NOT PROVIDED WHILE UNAUTHENTICATED
 Bio / Description | yes | yes | **biography** | str | |
-Sponsor | yes | | **sponsor** | boolean | True if the user has a sponsor button 
+Sponsor | yes | | **sponsor** | boolean | True if the user has a sponsor button
 Followers count | yes | yes | **followers_count** | int | can be rounded to kilos (or megs?)
 Followers list | yes | yes | followers | dict | NOT FETCHED YET
 Following count | yes | | **following_count** | int | can be rounded to kilos (or megs?)
 Following list | yes | | following | dict | NOT FETCHED YET
 Company | yes | | **company** | str |
-Location | yes | yes | **location** | str | 
+Location | yes | yes | **location** | str |
 Timezone | yes | | **timezone** | str |
 Public Email | yes | | | | NOT PROVIDED WHILE UNAUTHENTICATED
 Profile website URL | yes | yes | **website** | str | absolute URL
-Social | yes | yes | **social** | dict 
+Social | yes | yes | **social** | dict
 Social: facebook | yes | yes | **social**/**facebook** | dict | items have an **id** and a **url**
 Social: Instagram | yes | yes | **social**/**instagram** | dict | items have an **id** and a **url**
 Social: LinkedIn | yes | yes | **social**/**linkedin** | dict | items have an **id** and a **url**
@@ -82,6 +82,7 @@ Branches Count | | | yes | | | NOT AVAILABLE
 Tags Count | | | yes | | | NOT AVAILABLE
 Last updated | yes | yes | | **last_updated** | str |
 Commits Count | | | yes | **commits_count** | int |
+Archived | yes | yes | | **archived** | boolean | present for archived repositories
 
 ## Interesting URL for further scraping
 Item | Perso. | Orga. | URL
