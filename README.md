@@ -5,13 +5,13 @@
 
 This repository includes a command-line utility:
 * [libgh(1)](https://github.com/HubTou/libgh/blob/main/LIBGH.1.md) - GitHub scraping tool
-  (returning data as [text](https://www.frbsd.org/xch/libgh_as_text.txt),
-  [JSON](https://www.frbsd.org/xch/libgh_as_json.txt)
-  or [XML](https://www.frbsd.org/xch/libgh_as_xml.txt))
+  (returning data as [text](https://www.frbsd.org/xch/libgh.txt),
+  [JSON](https://www.frbsd.org/xch/libgh.json)
+  or [XML](https://www.frbsd.org/xch/libgh.xml))
 
 And a Python library:
 * [libgh(3)](https://github.com/HubTou/libgh/blob/main/LIBGH.3.md) - GitHub scraping library
-  (returning data as a [Python dictionary](https://www.frbsd.org/xch/libgh_as_text.txt))
+  (returning data as a [Python dictionary](https://www.frbsd.org/xch/libgh.txt))
 
 This software will scrape either personal or organizational accounts, or repositories.
 You can [check which data you can get here](https://github.com/HubTou/libgh/blob/main/FIELDS.md).
