@@ -68,7 +68,7 @@ The *cache_index* parameters indicate if an *index.txt* file should be generated
 
 The *min_delay* parameters indicate the number of seconds to be waited between requests to a specific Web site. 0 means no delay.
 
-The *max_per_day*, *max_per_hour* and *max_per_minute* parameters the cumulated number of requests to a specific Web site that can be made per time period. -1 means no limit.
+The *max_per_day*, *max_per_hour* and *max_per_minute* parameters indicate the cumulated number of requests to a specific Web site that can be made per time period. -1 means no limit.
 
 The *timeout* parameters indicate the maximum number of seconds to wait for an answer from a Web site, before raising a LookupError exception.
 
