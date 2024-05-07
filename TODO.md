@@ -1,8 +1,8 @@
 # libGH TODOLIST
-Feel free to submit your own ideas!
+Feel free to [submit your own ideas!](https://github.com/HubTou/libgh/discussions).
 
 ## Planned evolutions
-* Move libpnu2.py code into pnu-[libpnu](https://github.com/HubTou/libpnu) package
+* Move libpnu2.py code into [HubTou/libpnu](https://github.com/HubTou/libpnu)
 
 ## Probable evolutions
 * libpnu2/get_url_bdata:
@@ -12,9 +12,10 @@ Feel free to submit your own ideas!
     * Followers
     * Contributors
     * Stargazers
-    * Watching
+    * Watchers
   * Repos from:
     * Forks
+  * Instructions to do so will be passed with the "complete" parameter.
 
 ## Possible evolutions
 * Fetch:
@@ -27,3 +28,5 @@ Feel free to submit your own ideas!
 * Add GitHub authenticated mode
 
 ## Unprobable evolutions
+* A *--all|-a* option to load all repositories individually
+  * Not with the rate limits of unauthenticated mode anyway
