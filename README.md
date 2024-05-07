@@ -11,7 +11,7 @@ This repository includes a command-line utility:
 
 And a Python library:
 * [libgh(3)](https://github.com/HubTou/libgh/blob/main/LIBGH.3.md) - GitHub scraping library
-  (returning data as a [Python dictionary](https://www.frbsd.org/xch/libgh_as_dict.txt))
+  (returning data as a [Python dictionary](https://www.frbsd.org/xch/libgh_as_text.txt))
 
 This software will scrape either personal or organizational accounts, or repositories.
 You can [check which data you can get here](https://github.com/HubTou/libgh/blob/main/FIELDS.md).
