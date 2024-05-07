@@ -14,7 +14,7 @@ Dict *libgh*.**load_repository**(String account_name, String repository_name, In
 
 Dict *libgh*.**load_repositories**(List repositories_list, Integer cache_days, Boolean force_fetch=False)
 
-The following functions will be moved into the **libpnu** library in a future version:
+The following more generic functions will be moved into the **libpnu** library in a future version:
 
 Bytes, ListOfTuples *libgh*.**get_url_bdata**(String url, String cache_dir, Dict headers={}, Integer cache_days=1, Boolean cache_index=False, Boolean force_fetch=False, Integer min_delay=0, Integer max_per_minute=-1, Integer max_per_hour=-1, Integer max_per_day=-1, Integer timeout=15)
 
@@ -92,6 +92,10 @@ This directory will be located in one of the following places:
         %TMP%\cache\libgh
 
 An *index.txt* file will make the correspondence between URL and files.
+
+## EXAMPLES
+A function call **load_account**("HubTou", 1) on a personal GitHub account named *HubTou*
+returns [this dictionary](https://www.frbsd.org/xch/libgh.txt) of account information.
 
 ## STANDARDS
 The **libgh** library is not a standard UNIX one.
