@@ -19,11 +19,10 @@ from .repositories import load_repository, load_repositories
 from .libpnu2 import get_url_bdata, get_url_data, prune_cache, collection2xml
 
 # Version string used by the what(1) and ident(1) commands:
-ID = "@(#) $Id: libgh - GitHub scraping tool v0.9.0 (May 7, 2024) by Hubert Tournier $"
+ID = "@(#) $Id: libgh - GitHub scraping tool v0.9.1 (May 18, 2024) by Hubert Tournier $"
 
 # Default parameters. Can be overcome by environment variables, then command line options
 parameters = {
-    "Process repositories": False,
     "Prune cache": False,
     "Force fetching URL": False,
     "Cache days": CACHE_DAYS,
@@ -38,7 +37,7 @@ def _display_help():
     """ Display usage and help """
     #pylint: disable=C0301
     print("usage: libgh [--debug] [--help|-?] [--version]", file=sys.stderr)
-    print("       [--from] [--json|-j] [--repo|-r] [--topics] [--xml|-x]", file=sys.stderr)
+    print("       [--from] [--json|-j] [--topics] [--xml|-x]", file=sys.stderr)
     print("       [--days|-d DAYS] [--force|-f] [--prune|-p]", file=sys.stderr)
     print("       [--] account_or_repo [...]", file=sys.stderr)
     print("  ------------------  --------------------------------------------------", file=sys.stderr)
@@ -47,7 +46,6 @@ def _display_help():
     print("  --from              Load repositories when forked_from is blank", file=sys.stderr)
     print("  --json|-j           Switch to JSON output instead of plain text", file=sys.stderr)
     print("  --prune|-p          Prune cache items olday than DAYS and cache index", file=sys.stderr)
-    print("  --repo|-r           Process repositories instead of accounts", file=sys.stderr)
     print("  --topics            Load repositories when there are missing topics", file=sys.stderr)
     print("  --xml|-x            Switch to XML output instead of plain text", file=sys.stderr)
     print("  --debug             Enable debug mode", file=sys.stderr)
@@ -67,7 +65,7 @@ def _process_command_line():
 
     # option letters followed by : expect an argument
     # same for option strings followed by =
-    character_options = "d:fjprx?"
+    character_options = "d:fjpx?"
     string_options = [
         "days=",
         "debug",
@@ -76,7 +74,6 @@ def _process_command_line():
         "help",
         "json",
         "prune",
-        "repo",
         "topics",
         "version",
         "xml",
@@ -126,11 +123,6 @@ def _process_command_line():
 
         elif option in ("--prune", "-p"):
             parameters["Prune cache"] = True
-            parameters["Process repositories"] = False
-
-        elif option in ("--repo", "-r"):
-            parameters["Process repositories"] = True
-            parameters["Prune cache"] = False
 
         elif option == "--topics":
             parameters["Complete partial"].append("topics")
@@ -154,44 +146,50 @@ def main():
     if parameters["Prune cache"]:
         prune_cache(CACHE_DIR, parameters["Cache days"])
 
-    elif parameters["Process repositories"]:
-        if not arguments:
-            _display_help()
-        else:
-            repositories = load_repositories(
-                arguments,
-                parameters["Cache days"],
-                force_fetch=parameters["Force fetching URL"],
-            )
-            if parameters["JSON output"]:
-                json.dump(repositories, sys.stdout)
-                print()
-            elif parameters["XML output"]:
-                xml = collection2xml(repositories, name="repositories")
-                for line in xml:
-                    print(line)
-            else:
-                pprint.pprint(repositories, sort_dicts=False)
+    if not arguments:
+        _display_help()
 
     else:
-        if not arguments:
-            _display_help()
-        else:
-            accounts = load_accounts(
-                arguments,
+        accounts = []
+        repositories = []
+        for argument in arguments:
+            if '/' in argument:
+                repositories.append(argument)
+            else:
+                accounts.append(argument)
+
+        data = {}
+        if accounts:
+            data = load_accounts(
+                accounts,
                 parameters["Cache days"],
                 force_fetch=parameters["Force fetching URL"],
                 complete=parameters["Complete partial"],
             )
-            if parameters["JSON output"]:
-                json.dump(accounts, sys.stdout)
-                print()
-            elif parameters["XML output"]:
-                xml = collection2xml(accounts, name="accounts")
-                for line in xml:
-                    print(line)
-            else:
-                pprint.pprint(accounts, sort_dicts=False)
+        if repositories:
+            data2 = load_repositories(
+                repositories,
+                parameters["Cache days"],
+                force_fetch=parameters["Force fetching URL"],
+            )
+
+            # Performing nested dictionary update
+            for account, account_value in data2.items():
+                if account in data:
+                    for repository, repository_value in account_value["repositories"].items():
+                        data[account]["repositories"][repository] = repository_value
+                else:
+                    data[account] = account_value
+
+        if parameters["JSON output"]:
+            json.dump(data, sys.stdout)
+            print()
+        elif parameters["XML output"]:
+            xml = collection2xml(data, name="GitHub")
+            for line in xml:
+                print(line)
+        else:
+            pprint.pprint(data, sort_dicts=False)
 
     sys.exit(0)
 

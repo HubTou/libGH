@@ -10,7 +10,6 @@ libgh - GitHub scraping tool
 \[--from\]
 \[--json|-j\]
 \[--prune|-p\]
-\[--repo|-r\]
 \[--topics\]
 \[--xml|-x\]
 \[--debug\]
@@ -23,8 +22,8 @@ The alias **lgh** is also available to shorten the command name.
 
 ## DESCRIPTION
 The **libgh** command-line utility scraps data from a list of GitHub
-accounts (either personal or organizational) or repositories if the
-*--repo|-r* option is used.
+accounts (either personal or organizational) or repositories (in
+account/repository form).
 
 By default this data is returned as pretty-printed text, or JSON data
 if the *--json|-j* option is used, or XML data if the *--xml|-x* option
@@ -59,7 +58,6 @@ Options | Use
 --from|Load repositories when forked_from is blank
 --json\|-j|Switch to JSON output instead of plain text
 --prune\|-p|Prune cache items olday than DAYS and cache index
---repo\|-r|Process repositories instead of accounts
 --topics|Load repositories when there are missing topics
 --xml\|-x|Switch to XML output instead of plain text
 --debug|Enable debug mode

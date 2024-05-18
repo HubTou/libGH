@@ -29,11 +29,11 @@ def load_account(account_name, cache_days, force_fetch=False, complete=[]):
             max_per_hour=REQUESTS_PER_HOUR
         )
     except (LookupError, PermissionError) as error:
-        logging.error("libGH: %s", error)
+        logging.error("libgh: %s", error)
         return account
     for item in response:
         if item[0].startswith("x-ratelimit"):
-            logging.debug("libGH: HTTP response: %s=%s", item[0], item[1])
+            logging.debug("libgh: HTTP response: %s=%s", item[0], item[1])
 
     soup = BeautifulSoup(data, "html.parser")
 

@@ -37,11 +37,11 @@ def load_org_repositories(
                 max_per_hour=REQUESTS_PER_HOUR
             )
         except (LookupError, PermissionError) as error:
-            logging.error("libGH: %s", error)
+            logging.error("libgh: %s", error)
             return repos
         for item in response:
             if item[0].startswith("x-ratelimit"):
-                logging.debug("libGH: HTTP response: %s=%s", item[0], item[1])
+                logging.debug("libgh: HTTP response: %s=%s", item[0], item[1])
 
         soup = BeautifulSoup(data, "html.parser")
 
@@ -60,10 +60,6 @@ def load_org_repositories(
             name = repository["name"]
             repos[name] = {}
             uncomplete = False
-
-            # archived?
-            if repos_type == "archived":
-                repos[name]["archived"] = True
 
             # forked from
             if repository["isFork"]:
@@ -110,6 +106,10 @@ def load_org_repositories(
 
             # last updated
             repos[name]["last_updated"] = repository["lastUpdated"]["timestamp"]
+
+            # archived?
+            if repos_type == "archived":
+                repos[name]["archived"] = True
 
         # is there a next page?
         next_page = soup.select_one('[aria-label="Next Page"]')
@@ -279,7 +279,7 @@ def load_org_account(account_name, soup, cache_days, force_fetch=False, complete
 
     if len(account["repositories"]) != account["repositories_count"]:
         logging.warning(
-            "libGH: Loaded %d/%d repositories",
+            "libgh: Loaded %d/%d repositories",
             len(account["repositories"]),
             account["repositories_count"]
         )

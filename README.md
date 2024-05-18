@@ -1,5 +1,5 @@
-[![Servier Inspired](https://raw.githubusercontent.com/servierhub/.github/main/badges/inspired.svg)](https://github.com/ServierHub/)
 [![PyPI package](https://repology.org/badge/version-for-repo/pypi/python:pnu-libgh.svg)](https://repology.org/project/python:pnu-libgh/versions)
+[![Servier Inspired](https://raw.githubusercontent.com/servierhub/.github/main/badges/inspired.svg)](https://github.com/ServierHub/)
 
 # libGH(1), libGH(3) - GitHub scraping tool and library
 

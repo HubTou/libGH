@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 
 from .common import GITHUB_URL, CACHE_DIR, REQUESTS_MIN_DELAY, REQUESTS_PER_HOUR
 from .libpnu2 import get_url_data
+from .repositories import load_repository
 
 ####################################################################################################
 def load_user_repositories(user_name, url, page, cache_days, force_fetch=False, complete=[]):
@@ -28,11 +29,11 @@ def load_user_repositories(user_name, url, page, cache_days, force_fetch=False, 
             max_per_hour=REQUESTS_PER_HOUR
         )
     except (LookupError, PermissionError) as error:
-        logging.error("libGH: %s", error)
+        logging.error("libgh: %s", error)
         return repos
     for item in response:
         if item[0].startswith("x-ratelimit"):
-            logging.debug("libGH: HTTP response: %s=%s", item[0], item[1])
+            logging.debug("libgh: HTTP response: %s=%s", item[0], item[1])
 
     soup = BeautifulSoup(data, "html.parser")
 
@@ -45,21 +46,6 @@ def load_user_repositories(user_name, url, page, cache_days, force_fetch=False, 
         name = html.text.strip()
         repos[name] = {}
 
-        # archived?
-        li_class = item.get("class")
-        if "archived" in li_class:
-            repos[name]["archived"] = True
-
-        # forked from
-        html = item.select_one('[class="Link--muted Link--inTextBlock"]')
-        if html is not None:
-            repos[name]["forked_from"] = html.text.strip()
-
-        # description
-        html = item.select_one('[itemprop="description"]')
-        if html is not None:
-            repos[name]["description"] = html.text.strip()
-
         # topics
         repos[name]["topics"] = []
         html = item.select('[data-octo-click="topic_click"]')
@@ -67,34 +53,55 @@ def load_user_repositories(user_name, url, page, cache_days, force_fetch=False, 
             for html2 in html:
                 repos[name]["topics"].append(html2.text.strip())
 
-        # programming language
-        html = item.select_one('[itemprop="programmingLanguage"]')
-        if html is not None:
-            repos[name]["programming_language"] = html.text.strip()
+        # when there are 7 topics, it's probable than GitHub is only showing the first ones
+        # (can also happen with less when the topics character length is large)
+        if "topics" in repos[name] and len(repos[name]["topics"]) == 7 and "topics" in complete:
+            repos[name] = load_repository(user_name, name, cache_days, force_fetch)
 
-        # stargazers
-        repos[name]["stargazers"] = {}
-        html = item.select_one('[class="octicon octicon-star"]')
-        if html is None:
-            repos[name]["stargazers_count"] = 0
         else:
-            html2 = html.next_sibling
-            repos[name]["stargazers_count"] = int(html2.text.strip().replace(',', ''))
+            # archived?
+            li_class = item.get("class")
+            if "archived" in li_class:
+                repos[name]["archived"] = True
 
-        # forks
-        repos[name]["forks"] = {}
-        html = item.select_one('[class="octicon octicon-repo-forked"]')
-        if html is None:
-            repos[name]["forks_count"] = 0
-        else:
-            html2 = html.next_sibling
-            repos[name]["forks_count"] = int(html2.text.strip().replace(',', ''))
+            # forked from
+            html = item.select_one('[class="Link--muted Link--inTextBlock"]')
+            if html is not None:
+                repos[name]["forked_from"] = html.text.strip()
 
-        # license
-        html = item.select_one('[class*="octicon octicon-law"]')
-        if html is not None:
-            html2 = html.next_sibling
-            repos[name]["license"] = html2.text.strip()
+            # description
+            html = item.select_one('[itemprop="description"]')
+            if html is not None:
+                repos[name]["description"] = html.text.strip()
+
+            # programming language
+            html = item.select_one('[itemprop="programmingLanguage"]')
+            if html is not None:
+                repos[name]["programming_language"] = html.text.strip()
+
+            # stargazers
+            repos[name]["stargazers"] = {}
+            html = item.select_one('[class="octicon octicon-star"]')
+            if html is None:
+                repos[name]["stargazers_count"] = 0
+            else:
+                html2 = html.next_sibling
+                repos[name]["stargazers_count"] = int(html2.text.strip().replace(',', ''))
+
+            # forks
+            repos[name]["forks"] = {}
+            html = item.select_one('[class="octicon octicon-repo-forked"]')
+            if html is None:
+                repos[name]["forks_count"] = 0
+            else:
+                html2 = html.next_sibling
+                repos[name]["forks_count"] = int(html2.text.strip().replace(',', ''))
+
+            # license
+            html = item.select_one('[class*="octicon octicon-law"]')
+            if html is not None:
+                html2 = html.next_sibling
+                repos[name]["license"] = html2.text.strip()
 
         # updated
         html = item.select_one('relative-time')
@@ -358,7 +365,7 @@ def load_user_account(account_name, soup, cache_days, force_fetch=False, complet
 
     if len(account["repositories"]) != account["repositories_count"]:
         logging.warning(
-            "libGH: Loaded %d/%d repositories",
+            "libgh: Loaded %d/%d repositories",
             len(account["repositories"]),
             account["repositories_count"]
         )

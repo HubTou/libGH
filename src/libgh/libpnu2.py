@@ -36,7 +36,7 @@ def _count_from(current_time, requests_times):
     one_hour = 60 * 60 # seconds
     one_minute = 60 # seconds
 
-    # The requests_times is not necessarily ordered by ascending timestamps
+    # The requests_times is not necessarily ordered by ascending timestamps...
     for request_time in requests_times:
         time_diff = current_time - request_time
         if time_diff <= one_day:
@@ -141,13 +141,24 @@ def get_url_bdata(
             last_hour,
             last_minute
         )
+        slowing_down = False
         if last_day >= max_per_day > 0:
-            raise PermissionError(f"Max requests per day reached for '{website}'")
+            logging.debug("libpnu/get_url_bdata: Max requests per day reached. Sleeping for 1 day")
+            time.sleep(24 * 60 * 60)
+            slowing_down = True
         if last_hour >= max_per_hour > 0:
-            raise PermissionError(f"Max requests per hour reached for '{website}'")
+            logging.debug(
+                "libpnu/get_url_bdata: Max requests per hour reached. Sleeping for 1 hour"
+            )
+            time.sleep(60 * 60)
+            slowing_down = True
         if last_minute >= max_per_minute > 0:
-            logging.debug("libpnu/get_url_bdata: Slowing down URL fetching. Sleeping for 1 minute")
+            logging.debug(
+                "libpnu/get_url_bdata: Max requests per minute reached. Sleeping for 1 minute"
+            )
             time.sleep(60)
+            slowing_down = True
+        if slowing_down:
             current_time = time.time()
             current_date = datetime.datetime.fromtimestamp(current_time)
 
@@ -245,6 +256,7 @@ def prune_cache(cache_dir, cache_days):
 
     # Load the index file if it exist
     index_name = f"{directory}{os.sep}index.txt"
+    lines = []
     if os.path.isfile(index_name):
         with open(index_name, encoding="utf-8", errors="ignore") as file:
             lines = file.read().splitlines()

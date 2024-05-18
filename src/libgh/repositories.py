@@ -27,11 +27,11 @@ def load_repository(account_name, repository_name, cache_days, force_fetch=False
             max_per_hour=REQUESTS_PER_HOUR
         )
     except (LookupError, PermissionError) as error:
-        logging.error("libGH: %s", error)
+        logging.error("libgh: %s", error)
         return repository
     for item in response:
         if item[0].startswith("x-ratelimit"):
-            logging.debug("libGH: HTTP response: %s=%s", item[0], item[1])
+            logging.debug("libgh: HTTP response: %s=%s", item[0], item[1])
 
     soup = BeautifulSoup(data, "html.parser")
 
@@ -205,22 +205,26 @@ def load_repository(account_name, repository_name, cache_days, force_fetch=False
 ####################################################################################################
 def load_repositories(repositories_list, cache_days, force_fetch=False):
     """ Returns a dictionary of repositories information """
-    repositories = {}
+    accounts = {}
 
     for item in repositories_list:
         if item.count('/') == 1:
-            account_name = item.split('/')[0]
-            repository_name = item.split('/')[1]
-            repositories[item] = load_repository(
-                account_name,
-                repository_name,
+            account = item.split('/')[0]
+            repository = item.split('/')[1]
+
+            if account not in accounts:
+                accounts[account] = {"repositories":{}}
+
+            accounts[account]["repositories"][repository] = load_repository(
+                account,
+                repository,
                 cache_days,
                 force_fetch=force_fetch
             )
         else:
             logging.error(
-                "libGH: Repositories parameters must be in 'account/repo' form. '%s' discarded",
+                "libgh: Repositories parameters must be in 'account/repo' form. '%s' discarded",
                 item
             )
 
-    return repositories
+    return accounts
