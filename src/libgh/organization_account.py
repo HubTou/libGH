@@ -215,27 +215,30 @@ def load_org_account(account_name, soup, cache_days, force_fetch=False, complete
     # repositories
     account["repositories"] = {}
     html = soup.select_one('[data-autosearch-results]')
-    number = html.text.split()[3]
-    try:
-        account["repositories_count"] = int(number)
-    except ValueError:
-        pass
-    account["repositories"] = load_org_repositories(
-        account_name,
-        cache_days,
-        force_fetch=force_fetch,
-        complete=complete
-    )
-    if len(account["repositories"]) != account["repositories_count"]:
-        account["repositories"].update(
-            load_org_repositories(
-                account_name,
-                cache_days,
-                force_fetch=force_fetch,
-                complete=complete,
-                repos_type="archived"
-            )
+    if html is not None:
+        number = html.text.split()[3]
+        try:
+            account["repositories_count"] = int(number)
+        except ValueError:
+            pass
+        account["repositories"] = load_org_repositories(
+            account_name,
+            cache_days,
+            force_fetch=force_fetch,
+            complete=complete
         )
+        if len(account["repositories"]) != account["repositories_count"]:
+            account["repositories"].update(
+                load_org_repositories(
+                    account_name,
+                    cache_days,
+                    force_fetch=force_fetch,
+                    complete=complete,
+                    repos_type="archived"
+                )
+            )
+    else:
+        account["repositories_count"] = 0
 
     # repositories stars (computed)
     stars = 0
@@ -279,9 +282,10 @@ def load_org_account(account_name, soup, cache_days, force_fetch=False, complete
 
     if len(account["repositories"]) != account["repositories_count"]:
         logging.warning(
-            "libgh: Loaded %d/%d repositories",
+            "libgh: Loaded %d/%d repositories for account '%s'",
             len(account["repositories"]),
-            account["repositories_count"]
+            account["repositories_count"],
+            account_name
         )
 
     return account

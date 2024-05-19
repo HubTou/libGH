@@ -365,9 +365,10 @@ def load_user_account(account_name, soup, cache_days, force_fetch=False, complet
 
     if len(account["repositories"]) != account["repositories_count"]:
         logging.warning(
-            "libgh: Loaded %d/%d repositories",
+            "libgh: Loaded %d/%d repositories for account '%s'",
             len(account["repositories"]),
-            account["repositories_count"]
+            account["repositories_count"],
+            account_name
         )
 
     return account

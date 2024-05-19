@@ -108,7 +108,7 @@ To be tested under Windows.
 ## HISTORY
 This implementation was made for the [PNU project](https://github.com/HubTou/PNU).
 
-It's intended as the scraping engine for another tool.
+It's intended as the scraping engine for my [topgh](https://github.com/HubTou/topgh) tool.
 
 ## LICENSE
 This library is available under the [3-clause BSD license](https://opensource.org/licenses/BSD-3-Clause).
