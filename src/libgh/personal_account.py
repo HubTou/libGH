@@ -294,18 +294,21 @@ def load_user_account(account_name, soup, cache_days, force_fetch=False, complet
     # repositories
     account["repositories"] = {}
     html = soup.select_one('[data-tab-item="repositories"]')
-    try:
-        account["repositories_count"] = int([x.strip() for x in html.text.split("\n") if x][-1])
-    except ValueError:
+    if html is not None:
+        try:
+            account["repositories_count"] = int([x.strip() for x in html.text.split("\n") if x][-1])
+        except ValueError:
+            account["repositories_count"] = 0
+        account["repositories"] = load_user_repositories(
+            account_name,
+            f"{GITHUB_URL}/{account_name}?tab=repositories",
+            1,
+            cache_days,
+            force_fetch=force_fetch,
+            complete=complete
+        )
+    else:
         account["repositories_count"] = 0
-    account["repositories"] = load_user_repositories(
-        account_name,
-        f"{GITHUB_URL}/{account_name}?tab=repositories",
-        1,
-        cache_days,
-        force_fetch=force_fetch,
-        complete=complete
-    )
 
     # repositories stars (computed)
     stars = 0
@@ -316,9 +319,12 @@ def load_user_account(account_name, soup, cache_days, force_fetch=False, complet
     # stars
     account["stars"] = {}
     html = soup.select_one('[data-tab-item="stars"]')
-    try:
-        account["stars_count"] = int([x.strip() for x in html.text.split("\n") if x][-1])
-    except ValueError:
+    if html is not None:
+        try:
+            account["stars_count"] = int([x.strip() for x in html.text.split("\n") if x][-1])
+        except ValueError:
+            account["stars_count"] = 0
+    else:
         account["stars_count"] = 0
 
     # sponsoring

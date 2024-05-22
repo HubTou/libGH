@@ -19,7 +19,7 @@ from .repositories import load_repository, load_repositories
 from .libpnu2 import get_url_bdata, get_url_data, prune_cache, collection2xml
 
 # Version string used by the what(1) and ident(1) commands:
-ID = "@(#) $Id: libgh - GitHub scraping tool v0.9.2 (May 19, 2024) by Hubert Tournier $"
+ID = "@(#) $Id: libgh - GitHub scraping tool v0.9.3 (May 22, 2024) by Hubert Tournier $"
 
 # Default parameters. Can be overcome by environment variables, then command line options
 parameters = {
