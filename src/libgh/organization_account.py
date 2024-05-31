@@ -68,10 +68,16 @@ def load_org_repositories(
                     uncomplete = True
 
             # topics
-            repos[name]["topics"] = repository["topicNames"]
-            repos[name]["topics_count"] = \
-                len(repository["topicNames"]) + repository["topicsNotShown"]
-            if repository["topicsNotShown"] and "topics" in complete:
+            if "topicNames" in repository:
+                repos[name]["topics"] = repository["topicNames"]
+                repos[name]["topics_count"] = len(repository["topicNames"])
+                if "topicsNotShown" in repository:
+                    repos[name]["topics_count"] += repository["topicsNotShown"]
+            else:
+                repos[name]["topics"] = []
+                if "topicsNotShown" in repository:
+                    repos[name]["topics_count"] = repository["topicsNotShown"]
+            if "topicsNotShown" in repository and repository["topicsNotShown"] and "topics" in complete:
                 uncomplete = True
 
             if uncomplete:

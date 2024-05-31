@@ -119,7 +119,10 @@ def load_repository(account_name, repository_name, cache_days, force_fetch=False
         if item.get("href").endswith("/watchers"):
             html2 = item.select_one('strong')
             if html2 is not None:
-                repository["watching_count"] = html2.text.strip()
+                try:
+                    repository["watching_count"] = int(html2.text.strip())
+                except ValueError:
+                    pass
             break
 
     # Releases and Packages
