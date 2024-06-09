@@ -68,7 +68,10 @@ def load_org_repositories(
                     uncomplete = True
 
             # topics
-            if "topicNames" in repository:
+            if "allTopics" in repository:
+                repos[name]["topics"] = repository["allTopics"]
+                repos[name]["topics_count"] = len(repository["allTopics"])
+            elif "topicNames" in repository:
                 repos[name]["topics"] = repository["topicNames"]
                 repos[name]["topics_count"] = len(repository["topicNames"])
                 if "topicsNotShown" in repository:
@@ -130,7 +133,6 @@ def load_org_repositories(
         page += 1
 
     return repos
-
 
 ####################################################################################################
 def load_org_account(account_name, soup, cache_days, force_fetch=False, complete=[]):
